@@ -1,0 +1,18 @@
+# Log started 2026-01-30 18:46
+# Record of session commands.  Please note that this will
+# likely require editing if it is to be run as a script.
+open C:\Users\91955\Desktop\Sample.csv
+setobs 5 2021-01-19 --time-series
+gnuplot ClosingIndexvalue --time-series --with-lines
+logs ClosingIndexvalue
+gnuplot l_ClosingIndexvalue --time-series --with-lines
+genr dummy
+genr time
+delete dummy_1 dummy_2 dummy_3 dummy_4 dummy_5
+genr dummy
+# model 1
+arima 1 0 1 ; l_ClosingIndexvalue time dummy_1 dummy_2 dummy_3 dummy_4 0
+dataset addobs 10
+fcast 2025-11-18 2025-12-01
+# model 2
+arima 2 0 1 ; l_ClosingIndexvalue time dummy_1 dummy_2 dummy_3 dummy_4 0
